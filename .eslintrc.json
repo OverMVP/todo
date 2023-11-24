@@ -39,6 +39,21 @@
     "class-methods-use-this": "off",
     "consistent-return": "off",
     "react/no-unused-class-component-methods": "off",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelComponents": [
+          "CustomInputLabel"
+        ],
+        "labelAttributes": [
+          "label"
+        ],
+        "controlComponents": [
+          "CustomInput"
+        ],
+        "depth": 3
+      }
+    ],
     "jsx-a11y/no-autofocus": "off",
     "indent": [
       "error",

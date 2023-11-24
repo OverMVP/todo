@@ -38,44 +38,38 @@ export default class TaskFilter extends Component {
       <form className="filters">
         <fieldset>
           <div>
-            <label htmlFor="all">
-              <input
-                checked={this.isRadioSelected('all')}
-                id="all"
-                name="filter"
-                type="radio"
-                value="all"
-                onClick={onFilterAll}
-                onChange={this.handleRadioClick}
-              />
-              All
-            </label>
+            <input
+              checked={this.isRadioSelected('all')}
+              id="all"
+              name="filter"
+              type="radio"
+              value="all"
+              onClick={onFilterAll}
+              onChange={this.handleRadioClick}
+            />
+            <label htmlFor="all">All</label>
 
-            <label htmlFor="active">
-              <input
-                checked={this.isRadioSelected('active')}
-                id="active"
-                name="filter"
-                type="radio"
-                value="active"
-                onChange={this.handleRadioClick}
-                onClick={onFilterActive}
-              />
-              Active
-            </label>
+            <input
+              checked={this.isRadioSelected('active')}
+              id="active"
+              name="filter"
+              type="radio"
+              value="active"
+              onChange={this.handleRadioClick}
+              onClick={onFilterActive}
+            />
+            <label htmlFor="active">Active</label>
 
-            <label htmlFor="completed">
-              <input
-                checked={this.isRadioSelected('completed')}
-                id="completed"
-                name="filter"
-                type="radio"
-                value="completed"
-                onClick={onFilterCompleted}
-                onChange={this.handleRadioClick}
-              />
-              Completed
-            </label>
+            <input
+              checked={this.isRadioSelected('completed')}
+              id="completed"
+              name="filter"
+              type="radio"
+              value="completed"
+              onClick={onFilterCompleted}
+              onChange={this.handleRadioClick}
+            />
+            <label htmlFor="completed">Completed</label>
           </div>
         </fieldset>
       </form>

@@ -152,10 +152,7 @@ export default class App extends Component {
       active: () => items.filter((item) => !item.completed),
       completed: () => items.filter((item) => item.completed),
     };
-
-    if (filters.hasOwnProperty(filter)) {
-      return filters[filter]();
-    }
+    return filters.hasOwnProperty(filter) ? filters[filter]() : null;
   }
 
   render() {
