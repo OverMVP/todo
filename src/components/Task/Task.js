@@ -37,8 +37,8 @@ export default class Task extends Component {
   };
 
   componentDidMount() {
-    const savedTimeLeft = Number(localStorage.getItem(`${this.props.label}`));
-    const savedIsCounting = localStorage.getItem(`${this.props.label}State`);
+    const savedTimeLeft = Number(sessionStorage.getItem(`${this.props.label}`));
+    const savedIsCounting = sessionStorage.getItem(`${this.props.label}State`);
 
     if (savedIsCounting === 'true') {
       this.onClickStart();
@@ -53,18 +53,16 @@ export default class Task extends Component {
 
   componentDidUpdate(_, prevState) {
     if (prevState.timeLeft !== this.state.timeLeft) {
-      localStorage.setItem(`${this.props.label}`, `${this.state.timeLeft}`);
+      sessionStorage.setItem(`${this.props.label}`, `${this.state.timeLeft}`);
     }
 
     if (prevState.isCounting !== this.state.isCounting) {
-      localStorage.setItem(`${this.props.label}State`, this.state.isCounting);
+      sessionStorage.setItem(`${this.props.label}State`, this.state.isCounting);
     }
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
-    localStorage.removeItem(`${this.props.label}`);
-    localStorage.removeItem(`${this.props.label}State`);
   }
 
   onChangeInput = (e) => {
@@ -165,11 +163,14 @@ export default class Task extends Component {
             <span id="description" className="description" value={label}>
               {label}
             </span>
-            <button type="button" className="icon icon-play" onClick={this.onClickStart} />
-            <button type="button" className="icon icon-pause" onClick={this.onClickStop} />
-            <span className="time">
-              {mins}:{secs}
-            </span>
+            <div className="timer-button-group">
+              <button type="button" className="icon icon-play" onClick={this.onClickStart} />
+              <button type="button" className="icon icon-pause" onClick={this.onClickStop} />
+              <span className="time">
+                {mins}:{secs}
+              </span>
+            </div>
+
             <span className="created">{creationTime}</span>
           </label>
           <button type="button" onClick={onClickEdit} className="icon icon-edit" />
