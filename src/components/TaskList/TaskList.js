@@ -37,13 +37,14 @@ TaskList.propTypes = {
 
 function TaskList({ todos, onDeleted, onClickEdit, onToggleDone, onChangeEdit }) {
   const list = todos.map((item) => {
-    const { id, ...rest } = item;
+    const { id, timeLeft, ...rest } = item;
     return (
       <Task
         onChangeEdit={onChangeEdit}
         onClickEdit={() => onClickEdit(id)}
         onToggleDone={() => onToggleDone(id)}
         onDeleted={() => onDeleted(id)}
+        timeLeft={timeLeft}
         id={id}
         key={id}
         {...rest}

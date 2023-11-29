@@ -2,6 +2,13 @@ import { Component } from 'react';
 import './Task.css';
 import PropTypes from 'prop-types';
 
+function convertToMMSS(timeLeft) {
+  const mins = Math.floor(timeLeft / 60);
+  const seconds = timeLeft - mins * 60;
+
+  return [mins <= 9 ? `0${mins}` : mins, seconds <= 9 ? `0${seconds}` : seconds];
+}
+
 export default class Task extends Component {
   static defaultProps = {
     label: '',
@@ -25,7 +32,40 @@ export default class Task extends Component {
 
   state = {
     label: this.props.label || '',
+    isCounting: false,
+    timeLeft: this.props.timeLeft,
   };
+
+  componentDidMount() {
+    const savedTimeLeft = Number(localStorage.getItem(`${this.props.label}`));
+    const savedIsCounting = localStorage.getItem(`${this.props.label}State`);
+
+    if (savedIsCounting === 'true') {
+      this.onClickStart();
+    }
+
+    if (savedTimeLeft) {
+      this.setState({
+        timeLeft: savedTimeLeft,
+      });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.timeLeft !== this.state.timeLeft) {
+      localStorage.setItem(`${this.props.label}`, `${this.state.timeLeft}`);
+    }
+
+    if (prevState.isCounting !== this.state.isCounting) {
+      localStorage.setItem(`${this.props.label}State`, this.state.isCounting);
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+    localStorage.removeItem(`${this.props.label}`);
+    localStorage.removeItem(`${this.props.label}State`);
+  }
 
   onChangeInput = (e) => {
     e.preventDefault();
@@ -33,6 +73,37 @@ export default class Task extends Component {
     this.setState(() => ({
       label: text,
     }));
+  };
+
+  onClickStart = () => {
+    if (this.state.isCounting) {
+      return;
+    }
+    this.setState({
+      isCounting: true,
+    });
+
+    this.interval = setInterval(() => {
+      if (!this.state.isCounting) {
+        clearInterval(this.interval);
+      }
+
+      if (this.state.timeLeft > 0) {
+        this.setState(({ timeLeft }) => ({
+          timeLeft: timeLeft - 1,
+        }));
+      } else {
+        clearInterval(this.interval);
+        this.setState({ isCounting: false });
+      }
+    }, 1000);
+  };
+
+  onClickStop = () => {
+    this.setState({
+      isCounting: false,
+    });
+    clearInterval(this.interval);
   };
 
   onEditing = (e) => {
@@ -60,6 +131,9 @@ export default class Task extends Component {
 
   render() {
     const { label, creationTime, onDeleted, editing, completed, onToggleDone, onClickEdit } = this.props;
+    const { timeLeft } = this.state;
+    const timeArr = convertToMMSS(timeLeft);
+    const [mins, secs] = timeArr;
 
     let liClass = '';
 
@@ -90,6 +164,11 @@ export default class Task extends Component {
           <label htmlFor="desription">
             <span id="description" className="description" value={label}>
               {label}
+            </span>
+            <button type="button" className="icon icon-play" onClick={this.onClickStart} />
+            <button type="button" className="icon icon-pause" onClick={this.onClickStop} />
+            <span className="time">
+              {mins}:{secs}
             </span>
             <span className="created">{creationTime}</span>
           </label>

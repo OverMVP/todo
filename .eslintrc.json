@@ -3,11 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "ignorePatterns": [
-    "node_modules",
-    "dist",
-    "build"
-  ],
+  "ignorePatterns": ["node_modules", "dist", "build"],
   "extends": [
     "airbnb",
     "eslint:recommended",
@@ -22,12 +18,7 @@
     "allowImportExportEverywhere": false,
     "requireConfigFile": false
   },
-  "plugins": [
-    "react",
-    "prettier",
-    "import",
-    "jsx"
-  ],
+  "plugins": ["react", "prettier", "import", "jsx"],
   "rules": {
     "prefer-destructuring": "off",
     "react/destructuring-assignment": 0,
@@ -42,38 +33,21 @@
     "jsx-a11y/label-has-associated-control": [
       2,
       {
-        "labelComponents": [
-          "CustomInputLabel"
-        ],
-        "labelAttributes": [
-          "label"
-        ],
-        "controlComponents": [
-          "CustomInput"
-        ],
+        "labelComponents": ["CustomInputLabel"],
+        "labelAttributes": ["label"],
+        "controlComponents": ["CustomInput"],
         "depth": 3
       }
     ],
     "jsx-a11y/no-autofocus": "off",
-    "indent": [
-      "error",
-      2
-    ],
+    "indent": ["error", 2],
     "prettier/prettier": "error",
-    "linebreak-style": [
-      0,
-      "unix"
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
-      2,
-      "always"
-    ],
+    "linebreak-style": [0, "unix"],
+    "quotes": ["error", "single"],
+    "semi": [2, "always"],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": 0,
+    "react/no-unused-state": 0,
     "import/no-unresolved": [
       2,
       {
@@ -83,23 +57,13 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
     ],
     "import/order": [
       2,
       {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index"
-        ],
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
         "newlines-between": "always"
       }
     ],
@@ -108,16 +72,8 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
-        ],
-        "moduleDirectory": [
-          "node_modules",
-          "src/"
-        ]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "src/"]
       }
     }
   }

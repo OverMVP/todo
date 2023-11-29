@@ -100,10 +100,10 @@ export default class App extends Component {
   };
 
   // function that add a new Task into the tasks array
-  addNewTask = (text) => {
+  addNewTask = (text, mins, seconds) => {
     const label = this.validateAndTrim(text);
     this.setState(({ tasks }) => {
-      const newEl = this.createTodoItem(label);
+      const newEl = this.createTodoItem(label, mins, seconds);
       const newArr = [...tasks.slice(0), newEl];
       return {
         tasks: newArr,
@@ -123,14 +123,20 @@ export default class App extends Component {
     });
   };
 
+  formatTime(mins, seconds) {
+    const time = Number(mins) * 60 + Number(seconds);
+    return time;
+  }
+
   // function for creation an item (object) of the tasks array (made to avoid a boilerplate code) !!! using inside AddNewTask.fn
-  createTodoItem(text) {
+  createTodoItem(text, mins = 60, seconds = 0) {
     return {
       label: text,
       creationTime: formatDistanceToNow(new Date()),
       completed: false,
       editing: false,
       id: nanoid(),
+      timeLeft: this.formatTime(mins, seconds),
     };
   }
 
@@ -138,8 +144,8 @@ export default class App extends Component {
   validateAndTrim(text) {
     const textBefore = text.trim();
     let textAfter;
-    if (text.length > 19) {
-      textAfter = `${textBefore.slice(0, 19)}...`;
+    if (text.length > 18) {
+      textAfter = `${textBefore.slice(0, 15)}...`;
       return textAfter;
     }
     return textBefore;
