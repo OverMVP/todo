@@ -129,7 +129,7 @@ export default class App extends Component {
   }
 
   // function for creation an item (object) of the tasks array (made to avoid a boilerplate code) !!! using inside AddNewTask.fn
-  createTodoItem(text, mins = 60, seconds = 0) {
+  createTodoItem(text, mins = 0, seconds = 2) {
     return {
       label: text,
       creationTime: formatDistanceToNow(new Date()),

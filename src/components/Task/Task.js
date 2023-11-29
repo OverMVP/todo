@@ -91,6 +91,7 @@ export default class Task extends Component {
           timeLeft: timeLeft - 1,
         }));
       } else {
+        this.props.onToggleDone();
         clearInterval(this.interval);
         this.setState({ isCounting: false });
       }
