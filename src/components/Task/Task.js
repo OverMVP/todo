@@ -74,7 +74,7 @@ export default class Task extends Component {
   };
 
   onClickStart = () => {
-    if (this.state.isCounting) {
+    if (this.state.isCounting || this.props.completed) {
       return;
     }
     this.setState({

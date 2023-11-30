@@ -32,7 +32,7 @@
   color: white;
 }
 
-.filters :checked+label {
+.filters :checked + label {
   /* border-color: rgba(233, 26, 88, 0.4); */
   background-color: rgba(169, 42, 201, 0.4);
   color: white;
