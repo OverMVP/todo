@@ -44,7 +44,13 @@ export default class Task extends Component {
       this.onClickStart();
     }
 
-    if (savedTimeLeft || savedTimeLeft === 0) {
+    if (this.props.completed) {
+      this.setState({
+        timeLeft: 0,
+      });
+    }
+
+    if (savedTimeLeft) {
       this.setState({
         timeLeft: savedTimeLeft,
       });
