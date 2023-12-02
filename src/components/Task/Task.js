@@ -44,7 +44,7 @@ export default class Task extends Component {
       this.onClickStart();
     }
 
-    if (savedTimeLeft) {
+    if (savedTimeLeft || savedTimeLeft === 0) {
       this.setState({
         timeLeft: savedTimeLeft,
       });
@@ -93,7 +93,8 @@ export default class Task extends Component {
       } else {
         this.props.onToggleDone();
         clearInterval(this.interval);
-        this.setState({ isCounting: false });
+        this.onClickStop();
+        console.log(this.state.timeLeft);
       }
     }, 1000);
   };
